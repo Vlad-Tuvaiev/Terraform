@@ -27,18 +27,18 @@ module "ec2" {
   ]
 }
 
-# module "asg_elb-dev" {
-#   source                 = "../modules/aws_asg_elb"
-#   env                    = "dev"
-#   vpc_id                 = module.vpc_dev.vpc_id
-#   vpc_security_group_ids = module.vpc_dev.security_group_id
-#   public_subnet_ids      = module.vpc_dev.public_subnets_ids
-#   depends_on = [
-#     module.vpc_dev
-#   ]
-# }
+module "asg_elb-dev" {
+  source                 = "../modules/aws_asg_elb"
+  env                    = "dev"
+  vpc_id                 = module.vpc_dev.vpc_id
+  vpc_security_group_ids = module.vpc_dev.security_group_id
+  public_subnet_ids      = module.vpc_dev.public_subnets_ids
+  depends_on = [
+    module.vpc_dev
+  ]
+}
 
-#-------------------------------------------------------------------------------
-# output "Web_load_balancer" {
-#   value = module.asg_elb-dev.Web_load_balancer_url
-# }
+-------------------------------------------------------------------------------
+output "Web_load_balancer" {
+  value = module.asg_elb-dev.Web_load_balancer_url
+}
